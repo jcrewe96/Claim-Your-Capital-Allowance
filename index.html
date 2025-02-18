@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Your Capital Allowance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        input, button, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Claim Your Capital Allowance</h1>
+        <p>Find out if you qualify for a tax refund on your commercial property.</p>
+
+        <form action="https://formspree.io/f/mzzdknyk" method="POST" id="caForm">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="tel" name="phone" placeholder="Your Phone Number" required>
+            <input type="text" name="property_type" placeholder="Type of Property" required>
+            <input type="number" name="purchase_year" placeholder="Year of Property Purchase (YYYY)" required>
+
+            <label><b>Are you a UK taxpayer?</b></label>
+            <div class="radio-group">
+                <label><input type="radio" id="taxpayer_yes" name="uk_taxpayer" value="Yes" required> Yes</label>
+                <label><input type="radio" id="taxpayer_no" name="uk_taxpayer" value="No" required> No</label>
+            </div>
+
+            <button type="submit" id="submitBtn">Check Eligibility</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("caForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Stop default form submission
+            const formData = new FormData(this);
+            fetch(this.action, {
+                method: "POST",
+                body: formData,
+                headers: { "Accept": "application/json" }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = "thank-you.html"; // Redirect to thank you page
+                } else {
+                    alert("There was an issue submitting your form. Please try again.");
+                }
+            }).catch(error => alert("Error: " + error));
+        });
+    </script>
+
+</body>
+</html>
