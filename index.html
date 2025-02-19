@@ -39,6 +39,15 @@
             gap: 15px;
             margin: 10px 0;
         }
+        .checkbox-group {
+            text-align: left;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .checkbox-group input {
+            width: auto;
+            margin-right: 5px;
+        }
         button {
             background: #28a745;
             color: white;
@@ -49,6 +58,17 @@
         button:hover {
             background: #218838;
         }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -57,10 +77,36 @@
         <p>Find out if you qualify for a tax refund on your commercial property.</p>
 
         <form action="https://formspree.io/f/mzzdknyk" method="POST" id="caForm">
-            <input type="text" name="name" placeholder="Your Name" required>
+            <label><b>Title:</b></label>
+            <select name="title" required>
+                <option value="" disabled selected>Select Title</option>
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Ms">Ms</option>
+                <option value="Dr">Dr</option>
+                <option value="Prof">Prof</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <input type="text" name="first_name" placeholder="First Name" required>
+            <input type="text" name="last_name" placeholder="Last Name" required>
             <input type="email" name="email" placeholder="Your Email" required>
             <input type="tel" name="phone" placeholder="Your Phone Number" required>
-            <input type="text" name="property_type" placeholder="Type of Property" required>
+
+            <label><b>Type of Property:</b></label>
+            <select name="property_type" required>
+                <option value="" disabled selected>Select Property Type</option>
+                <option value="Furnished Holiday Let">Furnished Holiday Let</option>
+                <option value="Retail">Retail</option>
+                <option value="Office">Office</option>
+                <option value="Restaurant/Bar">Restaurant/Bar</option>
+                <option value="Industrial">Industrial</option>
+                <option value="Warehouse">Warehouse</option>
+                <option value="Hotel">Hotel</option>
+                <option value="Care Home">Care Home</option>
+                <option value="Other">Other</option>
+            </select>
+
             <input type="number" name="purchase_year" placeholder="Year of Property Purchase (YYYY)" required>
 
             <label><b>Are you a UK taxpayer?</b></label>
@@ -69,8 +115,20 @@
                 <label><input type="radio" id="taxpayer_no" name="uk_taxpayer" value="No" required> No</label>
             </div>
 
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="consent" id="consent" required>
+                    I agree to be contacted by a Capital Allowance specialist and consent to my data being stored and processed in line with the 
+                    <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.
+                </label>
+            </div>
+
             <button type="submit" id="submitBtn">Check Eligibility</button>
         </form>
+
+        <div class="footer">
+            <p><a href="privacy-policy.html" target="_blank">Privacy Policy</a></p>
+        </div>
     </div>
 
     <script>
@@ -89,7 +147,5 @@
                 }
             }).catch(error => alert("Error: " + error));
         });
-    </script>
+   
 
-</body>
-</html>
